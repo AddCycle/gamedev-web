@@ -1,10 +1,10 @@
 class Resources {
     constructor() {
         this.toLoad = {
-            sky: "/public/sprites/sky.png",
-            ground: "/public/sprites/ground.png",
-            hero: "/public/sprites/hero-sheet.png",
-            shadow: "/public/sprites/shadow.png"
+            sky: "/gamedev-web/public/sprites/sky.png",
+            ground: "/gamedev-web/public/sprites/ground.png",
+            hero: "/gamedev-web/public/sprites/hero-sheet.png",
+            shadow: "/gamedev-web/public/sprites/shadow.png"
         };
 
         this.images = {};
