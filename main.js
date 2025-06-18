@@ -3,8 +3,9 @@ import { Sprite } from "./src/Sprite.js";
 import { Vector2 } from "./src/Vector2.js";
 import { GameLoop } from "./src/GameLoop.js";
 import { Input, DOWN, UP, LEFT, RIGHT } from "./src/Input.js";
-import { gridCells } from "./src/helpers/grid.js";
+import { gridCells, isSpaceFree } from "./src/helpers/grid.js";
 import { moveTowards } from "./src/helpers/moveTowards.js";
+import { walls } from "./src/levels/level1.js";
 
 const canvas = document.querySelector('#game-canvas');
 const ctx = canvas.getContext("2d");
@@ -72,8 +73,10 @@ const tryMove = () => {
     hero.frame = 9;
   }
 
-  heroDestinationPos.x = nextX;
-  heroDestinationPos.y = nextY;
+  if (isSpaceFree(walls, nextX, nextY)) {
+    heroDestinationPos.x = nextX;
+    heroDestinationPos.y = nextY;
+  }
 }
 
 const draw = () => {
