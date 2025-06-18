@@ -3,7 +3,7 @@ import { Sprite } from "./src/Sprite.js";
 import { Vector2 } from "./src/Vector2.js";
 import { GameLoop } from "./src/GameLoop.js";
 import { Input, DOWN, UP, LEFT, RIGHT } from "./src/Input.js";
-import { gridCells } from "./src/helpers/Grid.js";
+import { gridCells } from "./src/helpers/grid.js";
 import { moveTowards } from "./src/helpers/moveTowards.js";
 
 const canvas = document.querySelector('#game-canvas');
