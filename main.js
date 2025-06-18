@@ -1,6 +1,10 @@
 import {resources} from "./src/Resource.js"
 import { Sprite } from "./src/Sprite.js";
 import { Vector2 } from "./src/Vector2.js";
+import { GameLoop } from "./src/GameLoop.js";
+import { Input, DOWN, UP, LEFT, RIGHT } from "./src/Input.js";
+import { gridCells } from "./src/helpers/Grid.js";
+import { moveTowards } from "./src/helpers/moveTowards.js";
 
 const canvas = document.querySelector('#game-canvas');
 const ctx = canvas.getContext("2d");
@@ -20,34 +24,68 @@ const hero = new Sprite({
     frameSize: new Vector2(32,32),
     hFrames: 3,
     vFrames: 8,
-    frame: 1
+    frame: 1,
+    position: new Vector2(gridCells(6), gridCells(5))
 })
+
+const heroDestinationPos = hero.position.duplicate();
 
 const shadow = new Sprite({
     resource: resources.images.shadow,
     frameSize: new Vector2(32,32)
 })
 
-const heroPos = new Vector2(16 * 6, 16 * 5);
+const input = new Input(); // keyboard handling
+
+const update = () => {
+
+  const distance = moveTowards(hero, heroDestinationPos, 1);
+  const hasArrived = distance <= 1;
+  if (hasArrived) {
+    tryMove()
+  }
+
+};
+
+const tryMove = () => {
+
+  if (!input.direction) return;
+
+  let nextX = heroDestinationPos.x;
+  let nextY = heroDestinationPos.y;
+  const gridSize = 16;
+
+  if (input.direction === DOWN) {
+    nextY += gridSize;
+    hero.frame = 0;
+  }
+  if (input.direction === UP) {
+    nextY -= gridSize;
+    hero.frame = 6;
+  };
+  if (input.direction === RIGHT) {
+    nextX += gridSize;
+    hero.frame = 3;
+  }
+  if (input.direction === LEFT) {
+    nextX -= gridSize;
+    hero.frame = 9;
+  }
+
+  heroDestinationPos.x = nextX;
+  heroDestinationPos.y = nextY;
+}
 
 const draw = () => {
     skySprite.drawImage(ctx, 0, 0);
     groundSprite.drawImage(ctx, 0, 0);
 
     const heroOffset = new Vector2(-8, -20);
-    const heroPosX = heroPos.x+heroOffset.x;
-    const heroPosY = heroPos.y+heroOffset.y;
+    const heroPosX = hero.position.x+heroOffset.x;
+    const heroPosY = hero.position.y+heroOffset.y;
     shadow.drawImage(ctx, heroPosX, heroPosY);
     hero.drawImage(ctx, heroPosX, heroPosY);
 }
 
-
-setInterval(() => {
-    // temp draw loop
-    if (hero.frame < 24) {
-        hero.frame++;
-    } else {
-        hero.frame = 0;
-    }
-    draw()
-}, 300)
+const gameLoop = new GameLoop(update, draw);
+gameLoop.start();
