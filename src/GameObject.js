@@ -6,13 +6,21 @@ export class GameObject {
     this.position = position ?? new Vector2(0,0);
     this.children = [];
     this.parent = null;
+    this.isReady = false; // does ready() has been called
   }
 
   stepEntry(delta, root) {
     this.children.forEach((child) => child.stepEntry(delta, root));
 
+    if (!this.isReady) {
+      this.isReady = true;
+      this.ready();
+    }
+
     this.step(delta, root);
   }
+
+  ready() {} // to override
 
   step(_delta) {
     // also to do it every frame

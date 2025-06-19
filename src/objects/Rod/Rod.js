@@ -14,8 +14,12 @@ export class Rod extends GameObject {
       resource: resources.images.rod,
       position: new Vector2(0, -5),
     });
-    this.addChild(sprite);
 
+    this.addChild(sprite);
+  }
+
+  // fires whenever the rod enters the scene
+  ready() {
     events.on("HERO_POSITION", this, pos => {
       const roundedHeroX = Math.round(pos.x);
       const roundedHeroY = Math.round(pos.y);

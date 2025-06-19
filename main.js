@@ -9,6 +9,7 @@ import { Hero } from "./src/objects/Hero/Hero.js";
 import { events } from "./src/Events.js";
 import { Camera } from "./src/Camera.js";
 import { Rod } from "./src/objects/Rod/Rod.js";
+import { Inventory } from "./src/objects/Inventory/Inventory.js";
 
 const canvas = document.querySelector('#game-canvas');
 const ctx = canvas.getContext("2d");
@@ -39,6 +40,8 @@ mainScene.addChild(camera);
 const rod = new Rod(gridCells(7), gridCells(6));
 mainScene.addChild(rod);
 
+const inventory = new Inventory();
+
 const update = (delta) => {
   mainScene.stepEntry(delta, mainScene)
 };
@@ -56,6 +59,9 @@ const draw = () => {
   mainScene.draw(ctx, 0, 0);
 
   ctx.restore();
+
+  // draws on top of anything :
+  inventory.draw(ctx, 0, 0);
 }
 
 const gameLoop = new GameLoop(update, draw);
