@@ -4,7 +4,8 @@ class Resources {
             sky: "/gamedev-web/public/sprites/sky.png",
             ground: "/gamedev-web/public/sprites/ground.png",
             hero: "/gamedev-web/public/sprites/hero-sheet.png",
-            shadow: "/gamedev-web/public/sprites/shadow.png"
+            shadow: "/gamedev-web/public/sprites/shadow.png",
+            rod: "/gamedev-web/public/sprites/rod.png",
         };
 
         this.images = {};

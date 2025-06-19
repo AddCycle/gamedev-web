@@ -1,4 +1,4 @@
-import {resources} from "./src/Resource.js"
+import {resources} from "./src/Resources.js"
 import { Sprite } from "./src/Sprite.js";
 import { Vector2 } from "./src/Vector2.js";
 import { GameLoop } from "./src/GameLoop.js";
@@ -8,6 +8,7 @@ import { GameObject } from "./src/GameObject.js";
 import { Hero } from "./src/objects/Hero/Hero.js";
 import { events } from "./src/Events.js";
 import { Camera } from "./src/Camera.js";
+import { Rod } from "./src/objects/Rod/Rod.js";
 
 const canvas = document.querySelector('#game-canvas');
 const ctx = canvas.getContext("2d");
@@ -34,6 +35,9 @@ mainScene.input = new Input(); // keyboard handling
 
 const camera = new Camera();
 mainScene.addChild(camera);
+
+const rod = new Rod(gridCells(7), gridCells(6));
+mainScene.addChild(rod);
 
 const update = (delta) => {
   mainScene.stepEntry(delta, mainScene)
