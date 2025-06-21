@@ -2,7 +2,7 @@ export function moveTowards(person, destinationPos, speed) {
   let distanceToTravelX = destinationPos.x - person.position.x;
   let distanceToTravelY = destinationPos.y - person.position.y;
 
-  let distance = Math.sqrt(distanceToTravelX**2 + distanceToTravelY**2);
+  let distance = Math.hypot(distanceToTravelX, distanceToTravelY);
 
   if (distance <= speed) {
     person.position.x = destinationPos.x;
@@ -16,7 +16,7 @@ export function moveTowards(person, destinationPos, speed) {
 
     distanceToTravelX = destinationPos.x - person.position.x;
     distanceToTravelY = destinationPos.y - person.position.y;
-    distance = Math.sqrt(distanceToTravelX**2 + distanceToTravelY**2);
+    distance = Math.hypot(distanceToTravelX, distanceToTravelY);
   }
   
   return distance;
