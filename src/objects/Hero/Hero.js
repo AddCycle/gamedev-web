@@ -108,8 +108,11 @@ export class Hero extends GameObject {
       this.body.animations.play("walkLeft");
     }
     this.facingDirection = input.direction ?? this.facingDirection;
+    const solidBodyAt = this.parent.children.find(c => {
+      return c.isSolid && c.position.x === nextX && c.position.y === nextY
+    });
 
-    if (isSpaceFree(root.level?.walls, nextX, nextY)) {
+    if (isSpaceFree(root.level?.walls, nextX, nextY) && !solidBodyAt) {
       this.destinationPosition.x = nextX;
       this.destinationPosition.y = nextY;
     }

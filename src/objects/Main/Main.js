@@ -3,6 +3,7 @@ import { events } from "../../Events.js";
 import { GameObject } from "../../GameObject.js";
 import { Input } from "../../Input.js";
 import { Inventory } from "../Inventory/Inventory.js";
+import { TextBox } from "../TextBox/TextBox.js";
 
 export class Main extends GameObject {
   constructor() {
@@ -11,6 +12,7 @@ export class Main extends GameObject {
     this.input = new Input();
     this.camera = new Camera();
     this.inventory = new Inventory();
+    this.textBox = new TextBox();
   }
 
   ready() {
@@ -35,5 +37,6 @@ export class Main extends GameObject {
   drawForeground(ctx) {
     const pos = this.inventory.position;
     this.inventory.draw(ctx, pos.x, pos.y);
+    this.textBox.draw(ctx, 0, 0);
   }
 }

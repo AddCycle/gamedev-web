@@ -7,6 +7,8 @@ export class GameObject {
     this.children = [];
     this.parent = null;
     this.isReady = false; // does ready() has been called
+    this.isSolid = false;
+    this.drawLayer = null;
   }
 
   stepEntry(delta, root) {
@@ -32,8 +34,15 @@ export class GameObject {
 
     this.drawImage(ctx, drawPosX, drawPosY);
 
-    this.children.forEach((child) => child.draw(ctx, drawPosX, drawPosY));
+    this.getDrawChildrenSorted().forEach((child) => child.draw(ctx, drawPosX, drawPosY));
 
+  }
+
+  getDrawChildrenSorted() {
+    return [...this.children].sort((a,b) => {
+      if (b.drawLayer === "FLOOR") return 1;
+      return a.position.y > b.position.y ? 1 : -1;
+    });
   }
 
   drawImage(ctx, drawPosX, drawPosY) {
