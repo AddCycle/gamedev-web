@@ -5,10 +5,10 @@ import { GameObject } from "../../GameObject.js";
 import { isSpaceFree } from "../../helpers/grid.js";
 import { moveTowards } from "../../helpers/moveTowards.js";
 import { DOWN, UP, LEFT, RIGHT } from "../../Input.js";
-import { walls } from "../../levels/level1.js";
 import { resources } from "../../Resources.js";
 import { Sprite } from "../../Sprite.js";
 import { Vector2 } from "../../Vector2.js";
+import { Walls } from "../Level/Walls.js";
 import { PICK_UP_DOWN, STAND_DOWN, STAND_LEFT, STAND_RIGHT, STAND_UP, WALK_DOWN, WALK_LEFT, WALK_RIGHT, WALK_UP } from "./heroAnimations.js";
 
 export class Hero extends GameObject {
@@ -109,7 +109,7 @@ export class Hero extends GameObject {
     }
     this.facingDirection = input.direction ?? this.facingDirection;
 
-    if (isSpaceFree(walls, nextX, nextY)) {
+    if (isSpaceFree(root.level?.walls, nextX, nextY)) {
       this.destinationPosition.x = nextX;
       this.destinationPosition.y = nextY;
     }

@@ -1,0 +1,27 @@
+import { events } from "../../Events.js";
+import { GameObject } from "../../GameObject.js";
+import { resources } from "../../Resources.js";
+import { Sprite } from "../../Sprite.js";
+import { Vector2 } from "../../Vector2.js";
+
+export class Exit extends GameObject {
+  constructor(x,y) {
+    super({
+      position: new Vector2(x,y)
+    })
+    this.addChild(new Sprite({
+      resource: resources.images.exit,
+    }))
+  }
+
+  // fires whenever the exit scene enters the scene
+  ready() {
+    events.on("HERO_POSITION", this, pos => {
+      const roundedHeroX = Math.round(pos.x);
+      const roundedHeroY = Math.round(pos.y);
+      if (this.position.x === roundedHeroX && this.position.y === roundedHeroY) {
+        events.emit("HERO_EXITS");
+      }
+    });
+  }
+}
