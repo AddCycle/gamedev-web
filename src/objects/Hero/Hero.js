@@ -12,7 +12,7 @@ import { Walls } from "../Level/Walls.js";
 import { PICK_UP_DOWN, STAND_DOWN, STAND_LEFT, STAND_RIGHT, STAND_UP, WALK_DOWN, WALK_LEFT, WALK_RIGHT, WALK_UP } from "./heroAnimations.js";
 
 export class Hero extends GameObject {
-  constructor(x,y) {
+  constructor(x,y,facingDirection) {
     super({
       position: new Vector2(x,y)
     });
@@ -45,7 +45,7 @@ export class Hero extends GameObject {
     })
     this.addChild(this.body);
 
-    this.facingDirection = DOWN;
+    this.facingDirection = facingDirection ?? DOWN;
     this.destinationPosition = this.position.duplicate();
     this.itemPickupTime = 0;
     this.itemPickupShell = null;
