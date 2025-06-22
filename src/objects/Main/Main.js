@@ -3,6 +3,7 @@ import { events } from "../../Events.js";
 import { GameObject } from "../../GameObject.js";
 import { Input } from "../../Input.js";
 import { Inventory } from "../Inventory/Inventory.js";
+import { SpriteTextString } from "../SpriteTextString/SpriteTextString.js";
 import { TextBox } from "../TextBox/TextBox.js";
 
 export class Main extends GameObject {
@@ -12,7 +13,7 @@ export class Main extends GameObject {
     this.input = new Input();
     this.camera = new Camera();
     this.inventory = new Inventory();
-    this.textBox = new TextBox();
+    this.textBox = new SpriteTextString();
   }
 
   ready() {

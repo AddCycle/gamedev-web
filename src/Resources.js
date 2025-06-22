@@ -10,7 +10,8 @@ class Resources {
       caveGround: "/gamedev-web/public/sprites/cave-ground.png",
       exit: "/gamedev-web/public/sprites/exit.png",
       knight: "/gamedev-web/public/sprites/knight-sheet-1.png",
-      textBox: "/gamedev-web/public/sprites/text-box.png"
+      textBox: "/gamedev-web/public/sprites/text-box.png",
+      fontWhite: "/gamedev-web/public/sprites/sprite-font-white.png",
     };
 
     this.images = {};
